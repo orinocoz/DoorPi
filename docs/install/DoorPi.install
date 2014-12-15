@@ -4,3 +4,4 @@ echo "* Install DoorPin service"
 sudo cp $HOME/DoorPi/docs/service/doorpi /etc/init.d/
 sudo update-rc.d doorpi start defaults
 sudo update-rc.d doorpi stop defaults
+sudo mkdir $HOME/DoorPi/records
