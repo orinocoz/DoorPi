@@ -167,9 +167,10 @@ class DoorPi(object):
     def fire_event(self, event_name, additional_informations = {}, secure_source = True):
         logger.trace('get event(event_name = %s, additional_informations = %s, secure_source = %s)', event_name, additional_informations, secure_source)
         self.__additional_informations = additional_informations
-        for action in sorted(self.get_config().get_keys(event_name)):
-            logger.trace("fire action %s for event %s", action, event_name)
-            self.fire_action(self.get_config().get(event_name, action), secure_source)
+        if self.get_config() is not None:
+            for action in sorted(self.get_config().get_keys(event_name)):
+                logger.trace("fire action %s for event %s", action, event_name)
+                self.fire_action(self.get_config().get(event_name, action), secure_source)
 
         self.__additional_informations = {}
         return True
