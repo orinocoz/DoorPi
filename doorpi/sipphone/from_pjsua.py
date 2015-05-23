@@ -94,7 +94,6 @@ class Pjsua(SipphoneAbstractBaseClass):
 
         self.__Lib = None
         self.__account = None
-        self.current_call = None
         self.current_callcallback = None
         self.current_account_callback = None
         self.__recorder = None
@@ -266,3 +265,10 @@ class Pjsua(SipphoneAbstractBaseClass):
 
         logger.debug("%s is not an adminnumber", remote_uri)
         return False
+
+    def hangup(self):
+        if self.current_call:
+            logger.debug("Received hangup request, cancelling current call")
+            self.lib.hangup_all()
+        else:
+            logger.debug("Ignoring hangup request as there is no ongoing call")
